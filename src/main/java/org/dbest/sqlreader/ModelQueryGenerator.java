@@ -39,9 +39,9 @@ public class ModelQueryGenerator {
         dependentInString =create_model_statement.dependent_value.getText();
         UnamedColumn dependent = new BaseColumn(dependentInString);
         System.out.println(dependentInString);
-        method = create_model_statement.METHOD().getText();
+        method = create_model_statement.sampling_method.getText();
         System.out.println(method);
-        ratioInString =create_model_statement.RATIO().getText();
+        ratioInString =create_model_statement.percent.getText();
         System.out.println(ratioInString);
         double ratio = Double.valueOf(ratioInString);
 
