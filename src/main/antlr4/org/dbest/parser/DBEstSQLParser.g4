@@ -67,10 +67,16 @@ dbest_statement
 
 create_model_statement
     : CREATE MODEL (IF NOT EXISTS)? model_name=table_name FROM original_table=table_name
-    (INDEPENDENT independent_value=column_name DEPENDENT dependent_value=column_name)?
-    (METHOD sampling_method=sampling_method_name)?
-    ((RATIO) percent=FLOAT)?
+      (INDEPENDENT independent_value=column_name DEPENDENT dependent_value=column_name)?
+      (METHOD sampling_method=sampling_method_name)?
+      (RATIO percent=FLOAT)?
     ;
+//create_model_statement
+//    : CREATE MODEL (IF NOT EXISTS)? model_name=table_name FROM original_table=table_name
+//      INDEPENDENT independent_value=column_name DEPENDENT dependent_value=column_name
+//      (METHOD sampling_method=sampling_method_name)?
+//      (RATIO percent=FLOAT)?
+//    ;
 drop_model_statement
     : DROP MODEL model_name=table_name (ON original_table=table_name)?
     ;

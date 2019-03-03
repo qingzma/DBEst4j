@@ -7,6 +7,8 @@ import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.apache.commons.lang3.tuple.Pair;
 
+import org.dbest.core.sqlobject.AbstractRelation;
+import org.dbest.core.sqlobject.CreateModelQuery;
 import org.dbest.parser.DBEstSQLLexer;
 import org.dbest.parser.DBEstSQLParser;
 
@@ -25,6 +27,21 @@ public class SQLParserEntry {
         p.addErrorListener(dbestErrorListener);
         return p;
     }
+
+//    public AbstractRelation toRelation(String sql){
+//        DBEstSQLParser p = parse(sql);
+//
+//    }
+
+    public CreateModelQuery toCreateModelQuery(String sql){
+        DBEstSQLParser p = parse(sql);
+        ModelQueryGenerator generator = new ModelQueryGenerator();
+        CreateModelQuery query = generator.visit(p.create_model_statement());
+        System.out.println(query.toString());
+        return query;
+    }
+
+
 
 
 

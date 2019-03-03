@@ -15,6 +15,8 @@ lexer grammar DBEstSQLLexer;
 //APPEND:                          A P P E N D;
 MODEL:                           M O D E L;
 MODELS:                          M O D E L S;
+INDEPENDENT:                     I N D E P E N D E N T;
+DEPENDENT:                       D E P E N D E N T;
 
 
 
