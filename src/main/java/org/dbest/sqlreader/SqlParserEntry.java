@@ -13,11 +13,11 @@ import org.dbest.parser.DBEstSQLLexer;
 import org.dbest.parser.DBEstSQLParser;
 
 
-public class SQLParserEntry {
+public class SqlParserEntry {
 
     private String queryInString;
 
-    public SQLParserEntry(){}
+    public SqlParserEntry(){}
 
     public static DBEstSQLParser parse(String text){
         DBEstErrorListener dbestErrorListener = new DBEstErrorListener();
@@ -40,7 +40,7 @@ public class SQLParserEntry {
         DBEstSQLParser p = parse(sql);
         ModelQueryGenerator generator = new ModelQueryGenerator();
         CreateModelQuery query = generator.visit(p.create_model_statement());
-        setQueryInString(toString());
+        setQueryInString(generator.toString());
         return query;
     }
 

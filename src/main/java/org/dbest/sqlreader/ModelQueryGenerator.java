@@ -26,23 +26,23 @@ public class ModelQueryGenerator {
         Sampling_method_nameContext sampling_method = create_model_statement.sampling_method;
 
         newSchema = stripQuote(model.schema.getText());
-//        System.out.println(newSchema);
+
         newModel = stripQuote(model.table.getText());
-//        System.out.println(newModel);
+
         originalSchema = stripQuote(original_table.schema.getText());
-//        System.out.println(originalSchema);
+
         originalTable = stripQuote(original_table.table.getText());
-//        System.out.println(originalTable);
+
         independentInString =create_model_statement.independent_value.getText();
         UnamedColumn independent = new BaseColumn(independentInString);
-//        System.out.println(independentInString);
+
         dependentInString =create_model_statement.dependent_value.getText();
         UnamedColumn dependent = new BaseColumn(dependentInString);
-//        System.out.println(dependentInString);
+
         method = create_model_statement.sampling_method.getText();
-//        System.out.println(method);
+
         ratioInString =create_model_statement.percent.getText();
-//        System.out.println(ratioInString);
+
         double ratio = Double.valueOf(ratioInString);
 
 
@@ -57,7 +57,6 @@ public class ModelQueryGenerator {
                 method,
                 ratio
         );
-        System.out.println(toString());
         return q;
     }
 
@@ -71,4 +70,5 @@ public class ModelQueryGenerator {
                 " INDEPENDENT "+independentInString+ " DEPENDENT  "+dependentInString+" METHOD " + method +
                 " RATIO "+ratioInString;
     }
+
 }
