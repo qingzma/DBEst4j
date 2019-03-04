@@ -14,6 +14,9 @@ import org.dbest.parser.DBEstSQLParser;
 
 
 public class SQLParserEntry {
+
+    private String queryInString;
+
     public SQLParserEntry(){}
 
     public static DBEstSQLParser parse(String text){
@@ -37,13 +40,16 @@ public class SQLParserEntry {
         DBEstSQLParser p = parse(sql);
         ModelQueryGenerator generator = new ModelQueryGenerator();
         CreateModelQuery query = generator.visit(p.create_model_statement());
-        System.out.println(query.toString());
+        setQueryInString(toString());
         return query;
     }
 
 
+    public String getQueryInString() {
+        return queryInString;
+    }
 
-
-
-
+    public void setQueryInString(String queryInString) {
+        this.queryInString = queryInString;
+    }
 }
