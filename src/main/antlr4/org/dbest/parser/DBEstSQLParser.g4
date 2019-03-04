@@ -67,7 +67,7 @@ dbest_statement
 
 create_model_statement
     : CREATE MODEL (IF NOT EXISTS)? model_name=table_name FROM original_table=table_name
-      (INDEPENDENT independent_value=column_name DEPENDENT dependent_value=column_name)?
+      INDEPENDENT independent_value=column_name DEPENDENT dependent_value=column_name
       (METHOD sampling_method=sampling_method_name)?
       (RATIO percent=FLOAT)?
     ;

@@ -7,10 +7,10 @@ public class Main {
 
         System.out.println("DBEst");
         SQLParserEntry sql =  new SQLParserEntry();
-        DBEstSQLParser result = sql.parse("SELECT * from table");
+        DBEstSQLParser result = SQLParserEntry.parse("SELECT * from table");
         System.out.println("DBEst");
 
-        sql.toCreateModelQuery("CREATE model  ss.modl from sch.tablex INDEPENDENT y DEPENDENT x METHOD uniform RATIO 0.5");
+        sql.toCreateModelQuery("CREATE model  ss.modl from ha.tablex INDEPENDENT y DEPENDENT x METHOD uniform RATIO 0.5");
 
 
     }
