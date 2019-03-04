@@ -15,7 +15,15 @@ public class DBEstStrings {
 
     public static final String LOGGER_NAME="org.dbest";
     public static final String LOGGER_CONVERT_SQL_TO_STRING="Converting the following sql object to string: ";
+    public static final String LOGGER_DEFAULT_CONSOLE_LOG_LEVEL="info";
+    public static final String LOGGER_DEFAULT_FILE_LOG_LEVEL="debug";
 
     public static final String METASTORE_NAME="dbestmetastore";
+
+    public static final String DRIVER_NAME="dbest";
+    public static final String DRIVER_NAME_MORE="dbestdb";
+
+    public static final String DRIVER_DEFAULT_META_SCHEMA_NAME="metaschema";
+    public static final String DRIVER_DEFAULT_TMP_SCHEMA_NAME="tmpschema";
 
 }
