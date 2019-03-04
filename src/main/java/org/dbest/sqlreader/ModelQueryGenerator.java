@@ -1,12 +1,17 @@
 package org.dbest.sqlreader;
 
 import org.dbest.core.sqlobject.BaseColumn;
+import org.dbest.core.sqlobject.BaseColumns;
 import org.dbest.core.sqlobject.CreateModelQuery;
 import org.dbest.core.sqlobject.UnamedColumn;
 import org.dbest.parser.DBEstSQLParser;
 import org.dbest.parser.DBEstSQLParser.Create_model_statementContext;
 import org.dbest.parser.DBEstSQLParser.Table_nameContext;
 import org.dbest.parser.DBEstSQLParser.Sampling_method_nameContext;
+import org.dbest.parser.DBEstSQLParser.Column_nameContext;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ModelQueryGenerator {
     private String newSchema;
@@ -15,7 +20,8 @@ public class ModelQueryGenerator {
     private String originalTable;
     private String method;
     private String independentInString;
-    private String dependentInString;
+    private List<String> dependentsInString=new ArrayList<>();
+    private BaseColumns dependents;
     private String ratioInString;
 
 
@@ -36,8 +42,14 @@ public class ModelQueryGenerator {
         independentInString =create_model_statement.independent_value.getText();
         UnamedColumn independent = new BaseColumn(independentInString);
 
-        dependentInString =create_model_statement.dependent_value.getText();
-        UnamedColumn dependent = new BaseColumn(dependentInString);
+
+        List<Column_nameContext> column_name_list=create_model_statement.column_name_list().column_name();
+        for (Column_nameContext cnc:column_name_list){
+            System.out.println(cnc.id().getText());
+            dependentsInString.add(cnc.id().getText());
+        }
+        System.out.println(dependentsInString.toString());
+        dependents = new BaseColumns(dependentsInString);
 
         method = create_model_statement.sampling_method.getText();
 
@@ -53,7 +65,7 @@ public class ModelQueryGenerator {
                 originalTable,
                 null,
                 independent,
-                dependent,
+                dependents,
                 method,
                 ratio
         );
@@ -67,7 +79,7 @@ public class ModelQueryGenerator {
 
     public String toString(){
         return "CREATE MODEL "+ newSchema+"."+ newModel + " FROM "+originalSchema+"."+originalTable+
-                " INDEPENDENT "+independentInString+ " DEPENDENT  "+dependentInString+" METHOD " + method +
+                " INDEPENDENT "+independentInString+ " DEPENDENT  "+ dependents.toString()+" METHOD " + method +
                 " RATIO "+ratioInString;
     }
 

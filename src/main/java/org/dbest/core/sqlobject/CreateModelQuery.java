@@ -11,13 +11,16 @@ public class CreateModelQuery implements SqlConvertible{
     private String originalSchema;
     private String originalTable;
     private String method;
+    protected boolean ifNotExists = false;
+
+
 
     // the condition used to create the model
     private UnamedColumn where = null;
     // the independentColumn of the model
     private UnamedColumn independentColumn= null;
     // the dependentColumn of the model
-    private UnamedColumn depedentColumn = null;
+    private BaseColumns depedentColumns = null;
     // the sampling probability to create te sample
     private double ratio = 1.0;
 
@@ -30,7 +33,7 @@ public class CreateModelQuery implements SqlConvertible{
             String originalTable,
             UnamedColumn where,
             UnamedColumn independentColumn,
-            UnamedColumn depedentColumn,
+            BaseColumns depedentColumns,
             String method,
             double ratio) {
         super();
@@ -41,7 +44,7 @@ public class CreateModelQuery implements SqlConvertible{
         this.method = method;
         this.where = where;
         this.independentColumn = independentColumn;
-        this.depedentColumn = depedentColumn;
+        this.depedentColumns = depedentColumns;
         this.ratio = ratio;
     }
 
@@ -117,12 +120,12 @@ public class CreateModelQuery implements SqlConvertible{
         this.independentColumn = independentColumn;
     }
 
-    public UnamedColumn getDepedentColumn() {
-        return depedentColumn;
+    public BaseColumns getDepedentColumns() {
+        return depedentColumns;
     }
 
-    public void setDepedentColumn(UnamedColumn depedentColumn) {
-        this.depedentColumn = depedentColumn;
+    public void setDepedentColumn(BaseColumns depedentColumn) {
+        this.depedentColumns = depedentColumns;
     }
 
     public double getRatio() {
@@ -131,5 +134,13 @@ public class CreateModelQuery implements SqlConvertible{
 
     public void setRatio(double ratio) {
         this.ratio = ratio;
+    }
+
+    public boolean isIfNotExists() {
+        return ifNotExists;
+    }
+
+    public void setIfNotExists(boolean ifNotExists) {
+        this.ifNotExists = ifNotExists;
     }
 }
