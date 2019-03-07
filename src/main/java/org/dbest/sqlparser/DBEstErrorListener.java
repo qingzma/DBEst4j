@@ -1,4 +1,4 @@
-package org.dbest.sqlreader;
+package org.dbest.sqlparser;
 
 
 import org.antlr.v4.runtime.BaseErrorListener;

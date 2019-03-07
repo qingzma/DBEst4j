@@ -1,11 +1,10 @@
-package org.dbest.sqlreader;
+package org.dbest.sqlparser;
 
-import org.dbest.core.sqlobject.CreateModelQuery;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class SqlParserEntryTest {
+public class SqlParserTest {
     /**
      * Test whether CreateModelQuery.class is working properly.
      */
@@ -13,9 +12,9 @@ public class SqlParserEntryTest {
     public void testToCreateModelQuery(){
         String inputQuery="CREATE model  ss.modl from ha.tablex INDEPENDENT y DEPENDENT x METHOD uniform RATIO 0.5";
         String targetQuery="CREATE MODEL ss.modl FROM ha.tablex INDEPENDENT y DEPENDENT  x METHOD uniform RATIO 0.5";
-        SqlParserEntry sql =  new SqlParserEntry();
-        CreateModelQuery q = sql.toCreateModelQuery(inputQuery);
-        String outputQuery = sql.getQueryInString();
+        SqlParser parser =  new SqlParser();
+        parser.toCreateModelQuery(inputQuery);
+        String outputQuery = parser.getSql();
         assertEquals(targetQuery,outputQuery);
     }
 

@@ -50,26 +50,28 @@ options { tokenVocab=DBEstSQLLexer; }
 
 dbest_statement
     : select_statement
-    | stream_select_statement
+//    | stream_select_statement
     | create_model_statement
 //    | insert_model_statement
     | drop_model_statement
     | drop_all_models_statement
     | show_models_statement
-    | config_statement
-    | other_statement
-    | create_table
-    | create_table_as_select
-    | create_view
-    | drop_table
-    | drop_view
+//    | config_statement
+//    | other_statement
+//    | create_table
+//    | create_table_as_select
+//    | create_view
+//    | drop_table
+//    | drop_view
     ;
 
 create_model_statement
     : CREATE MODEL (IF NOT EXISTS)? model_name=table_name FROM original_table=table_name
       INDEPENDENT independent_value=column_name DEPENDENT dependent_values=column_name_list
+//      (WHERE where=search_condition)?
       (METHOD sampling_method=sampling_method_name)?
       (RATIO percent=FLOAT)?
+      (GROUP BY group_by_item)?
     ;
 //create_model_statement
 //    : CREATE MODEL (IF NOT EXISTS)? model_name=table_name FROM original_table=table_name
