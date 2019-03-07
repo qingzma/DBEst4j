@@ -3,8 +3,7 @@ package org.dbest.sqlreader;
 import org.dbest.core.sqlobject.BaseColumn;
 import org.dbest.core.sqlobject.BaseColumns;
 import org.dbest.core.sqlobject.CreateModelQuery;
-import org.dbest.core.sqlobject.UnamedColumn;
-import org.dbest.parser.DBEstSQLParser;
+import org.dbest.core.sqlobject.UnnamedColumn;
 import org.dbest.parser.DBEstSQLParser.Create_model_statementContext;
 import org.dbest.parser.DBEstSQLParser.Table_nameContext;
 import org.dbest.parser.DBEstSQLParser.Sampling_method_nameContext;
@@ -40,7 +39,7 @@ public class ModelQueryGenerator {
         originalTable = stripQuote(original_table.table.getText());
 
         independentInString =create_model_statement.independent_value.getText();
-        UnamedColumn independent = new BaseColumn(independentInString);
+        UnnamedColumn independent = new BaseColumn(independentInString);
 
 
         List<Column_nameContext> column_name_list=create_model_statement.column_name_list().column_name();

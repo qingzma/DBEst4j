@@ -10,6 +10,7 @@ public class CreateModelDefinitionQuery extends CreateModelQuery{
 
     // See DataTypeConverter for types
     List<Pair<String, String>> columnNameAndTypes = new ArrayList<>();
+    List<Pair<String, List<String>>> columnNamesAndTypes = new ArrayList<>();
 
     public List<Pair<String, String>> getColumnNameAndTypes() {
         return columnNameAndTypes;
@@ -17,5 +18,13 @@ public class CreateModelDefinitionQuery extends CreateModelQuery{
 
     public void setColumnNameAndTypes(List<Pair<String, String>> columnNameAndTypes) {
         this.columnNameAndTypes = columnNameAndTypes;
+    }
+
+    public void addColumnNameAndType(Pair<String, String> nameAndType) {
+        this.columnNameAndTypes.add(nameAndType);
+    }
+
+    public void addColumnNamesAndTypes(Pair<String, List<String>> nameAndType) {
+        this.columnNamesAndTypes.add(nameAndType);
     }
 }

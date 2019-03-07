@@ -1,7 +1,10 @@
 package org.dbest.jdbc;
 
 import org.dbest.DBEstContext;
+import org.dbest.connection.CachedDbmsConnection;
+import org.dbest.connection.ConcurrentJdbcConnection;
 import org.dbest.connection.DbmsConnection;
+import org.dbest.connection.JdbcConnection;
 import org.dbest.exception.DBEstException;
 
 import java.sql.*;

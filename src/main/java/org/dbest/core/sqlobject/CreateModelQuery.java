@@ -16,9 +16,9 @@ public class CreateModelQuery implements SqlConvertible{
 
 
     // the condition used to create the model
-    private UnamedColumn where = null;
+    private UnnamedColumn where = null;
     // the independentColumn of the model
-    private UnamedColumn independentColumn= null;
+    private UnnamedColumn independentColumn= null;
     // the dependentColumn of the model
     private BaseColumns depedentColumns = null;
     // the sampling probability to create te sample
@@ -31,8 +31,8 @@ public class CreateModelQuery implements SqlConvertible{
             String newModel,
             String originalSchema,
             String originalTable,
-            UnamedColumn where,
-            UnamedColumn independentColumn,
+            UnnamedColumn where,
+            UnnamedColumn independentColumn,
             BaseColumns depedentColumns,
             String method,
             double ratio) {
@@ -104,19 +104,19 @@ public class CreateModelQuery implements SqlConvertible{
         this.method = method;
     }
 
-    public UnamedColumn getWhere() {
+    public UnnamedColumn getWhere() {
         return where;
     }
 
-    public void setWhere(UnamedColumn where) {
+    public void setWhere(UnnamedColumn where) {
         this.where = where;
     }
 
-    public UnamedColumn getIndependentColumn() {
+    public UnnamedColumn getIndependentColumn() {
         return independentColumn;
     }
 
-    public void setIndependentColumn(UnamedColumn independentColumn) {
+    public void setIndependentColumn(UnnamedColumn independentColumn) {
         this.independentColumn = independentColumn;
     }
 

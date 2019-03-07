@@ -9,7 +9,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public abstract class AbstractRelation implements Serializable {
-    private static final long serialVersionUID = 1668916233968899590L;
+    private static final long serialVersionUID = 5276890376100873020L;
 
     Optional<String> aliasName = Optional.absent();
 
@@ -17,8 +17,8 @@ public abstract class AbstractRelation implements Serializable {
         return aliasName;
     }
 
-    public void setAliasName(Optional<String> aliasName) {
-        this.aliasName = aliasName;
+    public void setAliasName(String aliasName) {
+        this.aliasName = Optional.of(aliasName);
     }
 
 
