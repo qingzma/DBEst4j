@@ -2,11 +2,11 @@ package org.dbest.metastore;
 
 import org.dbest.core.model.ModelMetaSet;
 
-public class CachedModelMetaStore extends DBEstMetaStore{
-    DBEstMetaStore originalMetaStore;
+public class CachedModelMetaStore extends DbestMetaStore {
+    DbestMetaStore originalMetaStore;
     ModelMetaSet cachedMetaSet=null;
 
-    public CachedModelMetaStore(DBEstMetaStore originalMetaStore) {
+    public CachedModelMetaStore(DbestMetaStore originalMetaStore) {
         this.originalMetaStore = originalMetaStore;
     }
 

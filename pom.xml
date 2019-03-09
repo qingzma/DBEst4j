@@ -25,8 +25,8 @@
         <junit.version>4.12</junit.version>
         <google.guava.version>14.0.1</google.guava.version>
         <org.apache.maven.plugins.version>3.8.0</org.apache.maven.plugins.version>
-        <jackson.databind.version>2.9.8</jackson.databind.version>
-        <spark.version>2.4.0</spark.version>
+        <jackson.databind.version>2.6.5</jackson.databind.version>
+        <spark.version>2.3.1</spark.version>
 
 
         <skipTests>false</skipTests>
@@ -86,6 +86,23 @@
 
         </plugins>
     </build>
+
+    <dependencyManagement>
+        <dependencies>
+            <!--Spark java.lang.NoClassDefFoundError: org/codehaus/janino/InternalCompilerException-->
+            <dependency>
+                <groupId>org.codehaus.janino</groupId>
+                <artifactId>commons-compiler</artifactId>
+                <version>3.0.8</version>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.janino</groupId>
+                <artifactId>janino</artifactId>
+                <version>3.0.8</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
 
     <dependencies>
         <dependency>
@@ -186,6 +203,24 @@
             <groupId>uk.com.robust-it</groupId>
             <artifactId>cloning</artifactId>
             <version>1.9.10</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.verdictdb</groupId>
+            <artifactId>verdictdb-core</artifactId>
+            <version>0.5.8</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.codehaus.janino</groupId>
+            <artifactId>commons-compiler</artifactId>
+            <version>3.0.8</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.janino</groupId>
+            <artifactId>janino</artifactId>
+            <version>3.0.8</version>
         </dependency>
     </dependencies>
 
