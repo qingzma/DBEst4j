@@ -1,7 +1,8 @@
 package org.dbest;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.dbest.commons.DbestLogger;
 import org.dbest.commons.DbestStrings;
 import org.dbest.connection.CachedDbmsConnection;
 import org.dbest.connection.DbmsConnection;
@@ -28,7 +29,7 @@ public class DbestContext {
     private long executionSerialNumber=0;
     private DbestOption option;
 
-    private static final DbestLogger log = DbestLogger.getLogger(DbestContext.class);
+    private static final Logger log = LogManager.getLogger(DbestContext.class);
 
     /**
      * Maintains the list of open executions. Each query is processed on a separate execution context.
@@ -151,9 +152,9 @@ public class DbestContext {
      * @return
      * @throws DbestException
      */
-    public DbestSingleResult sql(String sql) throws DbestException{
+    public DbestSingleResultFromDbms sql(String sql) throws DbestException{
         ExecutionContext exec = createNewExecutionContext();
-        DbestSingleResult result = exec.sql(sql, false);
+        DbestSingleResultFromDbms result = exec.sql(sql, false);
         removeExecutionContext(exec);
         return result;
     }

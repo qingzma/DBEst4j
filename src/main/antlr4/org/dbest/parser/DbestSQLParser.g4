@@ -61,6 +61,7 @@ dbest_statement
     | show_databases_statement
     | describe_table_statement
     | show_tables_statement
+    | use_statement
 //    | config_statement
 //    | other_statement
 //    | create_table
@@ -93,7 +94,7 @@ drop_all_models_statement
 	;
 
 show_models_statement
-    : SHOW MODELS
+    : SHOW MODELS (IN schema=id)? ';'?
     ;
 //WITH SIZE size=(FLOAT | DECIMAL) '%' (STORE poission_cols=DECIMAL POISSON COLUMNS)? (STRATIFIED BY column_name (',' column_name)*)?
 //create_scramble_statement

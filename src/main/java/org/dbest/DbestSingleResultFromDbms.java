@@ -10,11 +10,11 @@ import org.verdictdb.commons.DBTablePrinter;
 import org.verdictdb.commons.DataTypeConverter;
 
 /**
- * Represents the result set returned from VerdictDB to the end user.
+ * Represents the result set returned from DBest to the end user.
  *
  * @author Yongjoo Park
  */
-public abstract class DbestSingleResult extends AttributeValueRetrievalHelper {
+public abstract class DbestSingleResultFromDbms extends AttributeValueRetrievalHelper {
 
     public abstract boolean isEmpty();
 

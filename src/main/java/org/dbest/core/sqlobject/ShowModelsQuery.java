@@ -7,4 +7,9 @@ public class ShowModelsQuery extends DbestQuery {
     public String getSql() {
         return "SHOW MODELS";
     }
+
+    @Override
+    public void execute(boolean getResult) {
+
+    }
 }

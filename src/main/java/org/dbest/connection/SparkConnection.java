@@ -5,7 +5,8 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
-import org.dbest.commons.DbestLogger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.dbest.commons.StringSplitter;
 import org.dbest.exception.DbestDbmsException;
 
@@ -18,7 +19,7 @@ public class SparkConnection extends DbmsConnection{
 
     private String currentSchema;
 
-    private DbestLogger log = DbestLogger.getLogger(this.getClass());
+    private Logger log = LogManager.getLogger(getClass());
 
     public SparkConnection(SparkSession sc) {
         this.sc = sc;

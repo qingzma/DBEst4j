@@ -1,9 +1,9 @@
 
 import org.apache.spark.sql.SparkSession;
 import org.dbest.DbestContext;
-import org.dbest.coordinator.ExecutionContext;
+import org.dbest.commons.Config;
 import org.dbest.exception.DbestException;
-import org.dbest.sqlparser.SqlParser;
+import org.dbest.metastore.DbestOption;
 
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaSparkContext;
@@ -15,24 +15,25 @@ import java.util.Arrays;
 public class Main {
     public static void main(String[] args) throws DbestException {
 
-//        System.out.println("DBEst");
-        SqlParser parser =  new SqlParser();
-//        DBEstSQLParser result = SqlParser.parse("SELECT * from table");
-//        System.out.println("DBEst");
-        parser.toCreateModelQuery("CREATE model  ss.modl from ha.tablex INDEPENDENT y DEPENDENT x,z METHOD uniform RATIO 0.5");// group by groups");
-        parser.toCreateModelQuery("CREATE model  ss.modl from ha.tablex INDEPENDENT y DEPENDENT x,z");// group by groups");
-        System.out.println(parser.getSql());
-
-        parser.toCreateModelQuery("CREATE model  ss.modl from ha.tablex INDEPENDENT y DEPENDENT x,z group by groups");
-        System.out.println(parser.getSql());
-
-        ExecutionContext executionContext = new ExecutionContext();
-        System.out.println(executionContext.identifyQueryType("CREATE model  ss.modl from ha.tablex INDEPENDENT y DEPENDENT x,z METHOD uniform RATIO 0.5"));
-        System.out.println(executionContext.identifyQueryType("SHOW MODELS"));
+////        System.out.println("DBEst");
+//        SqlParser parser =  new SqlParser();
+////        DBEstSQLParser result = SqlParser.parse("SELECT * from table");
+////        System.out.println("DBEst");
+//        parser.toCreateModelQuery("CREATE model  ss.modl from ha.tablex INDEPENDENT y DEPENDENT x,z METHOD uniform RATIO 0.5");// group by groups");
+//        parser.toCreateModelQuery("CREATE model  ss.modl from ha.tablex INDEPENDENT y DEPENDENT x,z");// group by groups");
+//        System.out.println(parser.getSql());
+//
+//        parser.toCreateModelQuery("CREATE model  ss.modl from ha.tablex INDEPENDENT y DEPENDENT x,z group by groups");
+//        System.out.println(parser.getSql());
+//
+//        ExecutionContext executionContext = new ExecutionContext();
+//        System.out.println(executionContext.identifyQueryType("CREATE model  ss.modl from ha.tablex INDEPENDENT y DEPENDENT x,z METHOD uniform RATIO 0.5"));
+//        System.out.println(executionContext.identifyQueryType("SHOW MODELS"));
 
 
         Main app = new Main();
         app.testDbestContext();
+        app.testConfiguration();
 
     }
 
@@ -65,7 +66,17 @@ public class Main {
         spark.conf().set("spark.execution.memory","2g");
         spark.conf().set("spark.executor.cores",6);
 
-        DbestContext dbest = DbestContext.fromSparkSession(spark);
 
+        DbestOption option= new DbestOption();
+        option.setDbestConsoleLogLevel("trace");
+        DbestContext dbest = DbestContext.fromSparkSession(spark,option);
+        dbest.sql("create schema  newschema");
+
+    }
+
+    public void testConfiguration(){
+        Config conf= new Config();
+//        conf.getConfigs().addProperty("haha","hahah");
+//        conf.save();
     }
 }

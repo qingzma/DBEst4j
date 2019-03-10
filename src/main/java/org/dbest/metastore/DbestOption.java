@@ -1,12 +1,13 @@
 package org.dbest.metastore;
 
 import com.rits.cloning.Cloner;
+import org.dbest.commons.DbestStrings;
 
 import java.util.Properties;
 
 public class DbestOption {
     private String dbestMetaSchemaName="dbestmetaschema";
-    private String dbestTempSchemaName="dbesttempschema";
+    private String dbestTempSchemaName= DbestStrings.DEFAULT_MODEL_SCHEMA;
     private String dbestConsoleLogLevel="debug";    //info
     private String dbestFileLogLevel="debug";
     private String dbestTempModelPredix="tempmodel";

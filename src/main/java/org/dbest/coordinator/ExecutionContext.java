@@ -1,10 +1,12 @@
 package org.dbest.coordinator;
 
-import org.dbest.DbestSingleResult;
-import org.dbest.commons.DbestLogger;
+import org.dbest.DbestSingleResultFromDbms;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.dbest.commons.DbestStrings;
 import org.dbest.connection.CachedDbmsConnection;
 import org.dbest.connection.DbmsConnection;
+import org.dbest.core.sqlobject.CreateSchemaQuery;
 import org.dbest.exception.DbestDbmsException;
 import org.dbest.exception.DbestException;
 import org.dbest.exception.DbestTypeException;
@@ -14,9 +16,6 @@ import org.dbest.parser.DbestSQLParser;
 import org.dbest.parser.DbestSQLParserBaseVisitor;
 import org.dbest.sqlparser.SqlParser;
 
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class ExecutionContext {
     private DbmsConnection conn;
@@ -24,8 +23,9 @@ public class ExecutionContext {
     private QueryContext queryContext;
     private Coordinator coordinator=null;
     private final long serialNumber;
-    private final DbestLogger log = DbestLogger.getLogger(getClass());
+    private final Logger log = LogManager.getLogger(getClass());
     private DbestOption option;
+    private SqlParser sqlParser=new SqlParser();
 
     public enum QueryType{
         select,
@@ -125,15 +125,16 @@ public class ExecutionContext {
         return null;
     }
 
-    private DbestSingleResult convertResultsFromDbms(String sql) throws DbestDbmsException{
+    private DbestSingleResultFromDbms convertResultsFromDbms(String sql) throws DbestDbmsException{
         return new SingleResultFromDbms(conn.execute(sql));
     }
 
-    public DbestSingleResult sql(String sql) throws DbestException{
+    public DbestSingleResultFromDbms sql(String sql) throws DbestException{
         return this.sql(sql,true);
     }
 
-    public DbestSingleResult sql(String sql, boolean getResult) throws DbestException{
+    public DbestSingleResultFromDbms sql(String sql, boolean getResult) throws DbestException{
+
         String bypassSql= checkBypass(sql);
         if (bypassSql!=null){
             return convertResultsFromDbms(bypassSql);
@@ -150,7 +151,9 @@ public class ExecutionContext {
 //        && queryType != QueryType.drop_model
 //        && queryType != QueryType.drop_models
 //        && queryType != QueryType.drop_database
-        )){
+        )
+                && getResult)
+        {
             throw new DbestException(DbestStrings.EXCEPTION_SQL_NOT_SUPPORTED);
         }
 
@@ -165,8 +168,12 @@ public class ExecutionContext {
             ((CachedDbmsConnection) conn).clearCache();
         }
 
-        if(queryType.equals(QueryType.show_models)){
-            log.debug("Query type: show models "+sql);
+
+
+        if(queryType.equals(QueryType.create_database)){
+            log.info("Query type: create database - " +sql);
+//            System.out.println("Query type: create database - " +sql);
+            CreateSchemaQuery createSchemaQuery = new CreateSchemaQuery(sql);
             return null;
         }
         else if(queryType.equals(QueryType.show_models)){

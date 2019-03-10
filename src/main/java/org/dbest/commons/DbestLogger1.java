@@ -13,19 +13,19 @@ import ch.qos.logback.core.Appender;
 import ch.qos.logback.core.ConsoleAppender;
 import ch.qos.logback.core.FileAppender;
 
-public class DbestLogger implements  org.slf4j.Logger{
+public class DbestLogger1 implements  org.slf4j.Logger{
     private org.slf4j.Logger logger;
 
     private static final String DBEST_LOGGER_NAME= DbestStrings.LOGGER_NAME;
 
-    public DbestLogger(org.slf4j.Logger logger) { this.logger = logger; }
+    public DbestLogger1(org.slf4j.Logger logger) { this.logger = logger; }
 
-    public static DbestLogger getLogger(Class<?> c) {
-        return new DbestLogger(LoggerFactory.getLogger(c));
+    public static DbestLogger1 getLogger(Class<?> c) {
+        return new DbestLogger1(LoggerFactory.getLogger(c));
     }
 
-    public static DbestLogger getLogger(String name) {
-        return new DbestLogger(LoggerFactory.getLogger(name));
+    public static DbestLogger1 getLogger(String name) {
+        return new DbestLogger1(LoggerFactory.getLogger(name));
     }
 
     public static void setConsoleLogLevel(String level){
@@ -150,7 +150,7 @@ public class DbestLogger implements  org.slf4j.Logger{
 
     @Override
     public void debug(String s) {
-        synchronized (DbestLogger.class) {
+        synchronized (DbestLogger1.class) {
             logger.debug(s);
         }
     }

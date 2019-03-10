@@ -25,11 +25,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang3.time.FastDateFormat;
-import org.dbest.DbestSingleResult;
+import org.dbest.DbestSingleResultFromDbms;
 
 public class DbestResultSet implements ResultSet {
 
-    private DbestSingleResult queryResult;
+    private DbestSingleResultFromDbms queryResult;
 
     private ResultSetMetaData metadata;
 
@@ -39,7 +39,7 @@ public class DbestResultSet implements ResultSet {
 
     public DbestResultSet() {}
 
-    public DbestResultSet(DbestSingleResult queryResult) {
+    public DbestResultSet(DbestSingleResultFromDbms queryResult) {
         this.queryResult = queryResult;
         for (int i = 0; i < queryResult.getColumnCount(); i++) {
             colNameIdx.put(queryResult.getColumnName(i), i);

@@ -1,7 +1,8 @@
 package org.dbest.core.sqlobject;
 
 
-import org.dbest.commons.DbestLogger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.dbest.commons.DbestStrings;
 import org.dbest.parser.DbestSQLParser.Create_model_statementContext;
 import org.dbest.parser.DbestSQLParser.Table_nameContext;
@@ -27,7 +28,7 @@ public class CreateModelQuery extends DbestQuery {
     private List<String> dependents=new ArrayList<>();
     private double samplingRatio;
     private String groupby;
-    private DbestLogger logger= DbestLogger.getLogger(this.getClass());
+    private Logger logger = LogManager.getLogger(getClass());
 
 
 
@@ -125,6 +126,11 @@ public class CreateModelQuery extends DbestQuery {
             sql = sql + " GROUP BY "+groupby;
         }
         return sql;
+    }
+
+    @Override
+    public void execute(boolean getResult) {
+
     }
 
 }

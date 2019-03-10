@@ -2,12 +2,12 @@ package org.dbest.coordinator;
 
 import com.google.common.base.Optional;
 import com.rits.cloning.Cloner;
-import org.dbest.DbestSingleResult;
+import org.dbest.DbestSingleResultFromDbms;
 import org.dbest.connection.DbmsQueryResult;
 import org.dbest.connection.DbmsQueryResultMetaData;
 
 public class SingleResultFromDbms
-        extends DbestSingleResult {
+        extends DbestSingleResultFromDbms {
 
     private Optional<DbmsQueryResult> result;
 

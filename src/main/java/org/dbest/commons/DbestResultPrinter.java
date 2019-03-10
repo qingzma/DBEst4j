@@ -7,11 +7,11 @@ import java.io.Writer;
 
 
 import com.opencsv.CSVWriter;
-import org.dbest.DbestSingleResult;
+import org.dbest.DbestSingleResultFromDbms;
 
 public class DbestResultPrinter {
 
-    public static String SingleResultToCSV(DbestSingleResult singleResult) {
+    public static String SingleResultToCSV(DbestSingleResultFromDbms singleResult) {
         try {
             Writer writer = new StringWriter();
             CSVWriter csvWriter = new CSVWriter(writer,

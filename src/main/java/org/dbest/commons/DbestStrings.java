@@ -53,7 +53,7 @@ public class DbestStrings {
     public static final List<String> DRIVER_DEFAULT_DEPENDENTS= Arrays.asList("dependents");
     public static final String DRIVER_DEFAULT_SAMPLING_METHOD="model_sampling_method";
 
-    public static final String DEFAULT_MODEL_SCHEMA="dbestschema";
+    public static final String DEFAULT_MODEL_SCHEMA="dbestdefaultschema";
 
     public static final int EXIT_NORMAL=0;
     public static final int EXIT_ABNORMAL=1;

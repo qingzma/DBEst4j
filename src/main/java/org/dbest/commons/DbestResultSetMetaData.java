@@ -2,7 +2,7 @@ package org.dbest.commons;
 
 
 
-import org.dbest.DbestSingleResult;
+import org.dbest.DbestSingleResultFromDbms;
 import org.verdictdb.commons.DataTypeConverter;
 
 import java.sql.ResultSetMetaData;
@@ -13,13 +13,13 @@ import java.util.List;
 
 public class DbestResultSetMetaData implements ResultSetMetaData {
 
-    private DbestSingleResult queryResult;
+    private DbestSingleResultFromDbms queryResult;
 
     List<String> caseSensitiveColumnTypes = Arrays.asList("char", "string", "text");
 
     List<String> signedColumnTypes = Arrays.asList("double", "int", "real");
 
-    public DbestResultSetMetaData(DbestSingleResult queryResult) {
+    public DbestResultSetMetaData(DbestSingleResultFromDbms queryResult) {
         this.queryResult = queryResult;
     }
 
