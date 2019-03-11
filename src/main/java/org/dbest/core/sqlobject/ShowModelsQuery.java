@@ -9,6 +9,16 @@ public class ShowModelsQuery extends DbestQuery {
     }
 
     @Override
+    public void parse() {
+
+    }
+
+    @Override
+    public void execute() {
+
+    }
+
+    @Override
     public void execute(boolean getResult) {
 
     }

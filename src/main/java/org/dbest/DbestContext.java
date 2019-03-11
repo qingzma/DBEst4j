@@ -3,7 +3,9 @@ package org.dbest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.dbest.commons.Config;
 import org.dbest.commons.DbestStrings;
+import org.dbest.commons.io.DbestFileSystem;
 import org.dbest.connection.CachedDbmsConnection;
 import org.dbest.connection.DbmsConnection;
 import org.dbest.connection.SparkConnection;
@@ -28,6 +30,8 @@ public class DbestContext {
     private final String contextId;
     private long executionSerialNumber=0;
     private DbestOption option;
+//    private static Config configuration= new Config();
+    private static DbestFileSystem fileSystem;
 
     private static final Logger log = LogManager.getLogger(DbestContext.class);
 
@@ -41,7 +45,9 @@ public class DbestContext {
         this.contextId= RandomStringUtils.randomAlphabetic(5);
         this.option= new DbestOption();
         this.metaStore=getCachedMetaStore(conn,option);
-        initialize(option);
+//        initialize(option);
+        fileSystem= new DbestFileSystem();
+        fileSystem.initialize();
     }
 
     public DbestContext(DbmsConnection conn,DbestOption option) throws DbestException {
@@ -49,7 +55,9 @@ public class DbestContext {
         this.contextId= RandomStringUtils.randomAlphabetic(5);
         this.option= option;
         this.metaStore=getCachedMetaStore(conn,option);
-        initialize(option);
+//        initialize(option);
+        fileSystem= new DbestFileSystem();
+        fileSystem.initialize();
     }
 
     private DbestMetaStore getCachedMetaStore(DbmsConnection conn, DbestOption option){
@@ -68,6 +76,8 @@ public class DbestContext {
         String sql= "CREATE  SCHEMA IF NOT EXISTS "+schema;
         conn.execute(sql);
     }
+
+
 
 
     public static DbestContext fromSparkSession(Object sparkSession) throws DbestException{

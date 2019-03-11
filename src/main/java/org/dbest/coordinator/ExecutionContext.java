@@ -7,6 +7,8 @@ import org.dbest.commons.DbestStrings;
 import org.dbest.connection.CachedDbmsConnection;
 import org.dbest.connection.DbmsConnection;
 import org.dbest.core.sqlobject.CreateSchemaQuery;
+import org.dbest.core.sqlobject.DropSchemaQuery;
+import org.dbest.core.sqlobject.UseQuery;
 import org.dbest.exception.DbestDbmsException;
 import org.dbest.exception.DbestException;
 import org.dbest.exception.DbestTypeException;
@@ -38,6 +40,7 @@ public class ExecutionContext {
         show_databases,
         show_tables,
         describe_table,
+        use_schema,
         unknown
     }
 
@@ -60,6 +63,11 @@ public class ExecutionContext {
     public static QueryType identifyQueryType(String sql){
         DbestSQLParser parser= SqlParser.parse(sql);
         DbestSQLParserBaseVisitor<QueryType> visitor= new DbestSQLParserBaseVisitor<QueryType>() {
+            @Override
+            public QueryType visitUse_statement(DbestSQLParser.Use_statementContext ctx) {
+                return QueryType.use_schema;
+            }
+
             @Override
             public QueryType visitCreate_model_statement(DbestSQLParser.Create_model_statementContext ctx) {
                 return QueryType.create_model;
@@ -176,12 +184,14 @@ public class ExecutionContext {
             CreateSchemaQuery createSchemaQuery = new CreateSchemaQuery(sql);
             return null;
         }
-        else if(queryType.equals(QueryType.show_models)){
-            log.debug("Query type: show models "+sql);
+        else if(queryType.equals(QueryType.drop_database)){
+            log.info("Query type: drop schema "+sql);
+            DropSchemaQuery dropSchemaQuery = new DropSchemaQuery(sql);
             return null;
         }
-        else if(queryType.equals(QueryType.show_models)){
-            log.debug("Query type: show models "+sql);
+        else if(queryType.equals(QueryType.use_schema)){
+            log.debug("Query type: USE SCHEMA - "+sql);
+            UseQuery useQuery = new UseQuery(sql);
             return null;
         }
         else if(queryType.equals(QueryType.show_models)){

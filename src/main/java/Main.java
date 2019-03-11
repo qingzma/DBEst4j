@@ -32,7 +32,7 @@ public class Main {
 
 
         Main app = new Main();
-        app.testDbestContext();
+        app.testDbestContextHdfs();
         app.testConfiguration();
 
     }
@@ -56,7 +56,7 @@ public class Main {
 
     }
 
-    public void testDbestContext() throws DbestException {
+    public void testDbestContextLocal() throws DbestException {
         SparkSession spark = SparkSession
                 .builder()
                 .appName("DBEst test")
@@ -73,6 +73,49 @@ public class Main {
         dbest.sql("create schema  newschema");
 
     }
+
+//    public void testDbestContextHdfs1() throws DbestException {
+//        Config config = new Config();
+//        SparkSession spark = SparkSession
+//                .builder()
+//                .appName("DBEst test")
+//                .master(config.getConfigs().getString("spark.master"))
+//                .config("spark.sql.warehouse.dir",config.getConfigs().getString("spark.warehouse"))
+//                .enableHiveSupport()
+//                .getOrCreate();
+//        spark.conf().set("spark.execution.memory","2g");
+//        spark.conf().set("spark.executor.cores",6);
+//
+//
+//        DbestOption option= new DbestOption();
+//        option.setDbestConsoleLogLevel("trace");
+//        DbestContext dbest = DbestContext.fromSparkSession(spark,option);
+//        dbest.sql("create schema newschema");
+//
+//    }
+
+    public void testDbestContextHdfs() throws DbestException {
+        Config config = new Config();
+        SparkSession spark = SparkSession
+                .builder()
+                .appName("DBEst test")
+                .master(config.getConfiguration().get("spark.master"))
+                .config("spark.sql.warehouse.dir",config.getConfiguration().get("spark.warehouse"))
+                .enableHiveSupport()
+                .getOrCreate();
+        spark.conf().set("spark.execution.memory","2g");
+        spark.conf().set("spark.executor.cores",6);
+
+
+        DbestOption option= new DbestOption();
+        option.setDbestConsoleLogLevel("trace");
+        DbestContext dbest = DbestContext.fromSparkSession(spark,option);
+        dbest.sql("create schema newschema");
+        dbest.sql("use newschema");
+        dbest.sql("drop schema newschema");
+
+    }
+
 
     public void testConfiguration(){
         Config conf= new Config();

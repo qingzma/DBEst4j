@@ -11,8 +11,7 @@ public class DbestOption {
     private String dbestConsoleLogLevel="debug";    //info
     private String dbestFileLogLevel="debug";
     private String dbestTempModelPredix="tempmodel";
-
-
+    private String fileSystem;
 
     public String getDbestMetaSchemaName() {
         return dbestMetaSchemaName;
