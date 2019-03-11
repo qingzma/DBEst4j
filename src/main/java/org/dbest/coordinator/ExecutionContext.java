@@ -6,9 +6,7 @@ import org.apache.logging.log4j.Logger;
 import org.dbest.commons.DbestStrings;
 import org.dbest.connection.CachedDbmsConnection;
 import org.dbest.connection.DbmsConnection;
-import org.dbest.core.sqlobject.CreateSchemaQuery;
-import org.dbest.core.sqlobject.DropSchemaQuery;
-import org.dbest.core.sqlobject.UseQuery;
+import org.dbest.core.sqlobject.*;
 import org.dbest.exception.DbestDbmsException;
 import org.dbest.exception.DbestException;
 import org.dbest.exception.DbestTypeException;
@@ -194,20 +192,24 @@ public class ExecutionContext {
             UseQuery useQuery = new UseQuery(sql);
             return null;
         }
-        else if(queryType.equals(QueryType.show_models)){
-            log.debug("Query type: show models "+sql);
+        else if(queryType.equals(QueryType.create_model)){
+            log.debug("Query type: CREATE MODEL - "+sql);
+            CreateModelQuery createModelQuery = new CreateModelQuery(sql);
             return null;
         }
         else if(queryType.equals(QueryType.show_models)){
-            log.debug("Query type: show models "+sql);
+            log.debug("Query type: show models - "+sql);
+            ShowModelsQuery showModelsQuery = new ShowModelsQuery(sql);
             return null;
         }
-        else if(queryType.equals(QueryType.show_models)){
-            log.debug("Query type: show models "+sql);
+        else if(queryType.equals(QueryType.drop_model)){
+            log.debug("Query type: DROP MODELS - "+sql);
+            DropModelQuery dropModelQuery = new DropModelQuery(sql);
             return null;
         }
-        else if(queryType.equals(QueryType.show_models)){
+        else if(queryType.equals(QueryType.show_databases)){
             log.debug("Query type: show models "+sql);
+            ShowSchemaQuery showSchemaQuery = new ShowSchemaQuery(sql);
             return null;
         } else {
             DbestTypeException e= new DbestTypeException("Unexpected query type :" + sql);

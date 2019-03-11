@@ -18,7 +18,7 @@ public class CreateSchemaQuery extends DbestQuery{
     private String sql;
     private Logger log = LogManager.getLogger(getClass());
     private static Config config;
-    private static DbestFileSystem fileSystem= new DbestFileSystem();
+    private static DbestFileSystem fileSystem;
 
 
 
@@ -26,7 +26,7 @@ public class CreateSchemaQuery extends DbestQuery{
         this.sql = sql;
         this.parse();
         config = new Config();
-        execute();
+        execute(false);
     }
 
 
@@ -47,10 +47,7 @@ public class CreateSchemaQuery extends DbestQuery{
         visit(p.create_database());
     }
 
-    @Override
-    public void execute() {
-        fileSystem.createSchema(schema);
-    }
+
 
     @Override
     public String getSql() {
@@ -58,7 +55,12 @@ public class CreateSchemaQuery extends DbestQuery{
     }
 
     @Override
-    public void execute(boolean getResult) {
+    public synchronized void execute(boolean getResult) {
+        if (! getResult){
+            fileSystem = new DbestFileSystem();
+            fileSystem.createSchema(schema);
+            fileSystem.close();
+        }
 
     }
 }

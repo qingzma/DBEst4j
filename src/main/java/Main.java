@@ -110,10 +110,15 @@ public class Main {
         DbestOption option= new DbestOption();
         option.setDbestConsoleLogLevel("trace");
         DbestContext dbest = DbestContext.fromSparkSession(spark,option);
-        dbest.sql("create schema newschema");
-        dbest.sql("use newschema");
-        dbest.sql("drop schema newschema");
+        dbest.sql("create schema dbest");
+        dbest.sql("use dbest");
 
+
+        dbest.sql("CREATE model  dbest.modl2 from spark.tablex INDEPENDENT z DEPENDENT x,y METHOD uniform RATIO 0.5");
+        dbest.sql("show models in dbest");
+        dbest.sql("drop model modl2");
+        dbest.sql("show schemas");
+//        dbest.sql("drop schema dbest");
     }
 
 

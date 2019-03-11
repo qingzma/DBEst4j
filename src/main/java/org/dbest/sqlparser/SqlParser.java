@@ -30,13 +30,13 @@ public class SqlParser {
     }
 
 
-    public CreateModelQuery toCreateModelQuery(String sql){
-        DbestSQLParser p = parse(sql);
-        CreateModelQuery createModelQuery = new CreateModelQuery();
-        createModelQuery.visit(p.create_model_statement());
-        setSql(createModelQuery.getSql());
-        return createModelQuery;
-    }
+//    public CreateModelQuery toCreateModelQuery(String sql){
+//        DbestSQLParser p = parse(sql);
+//        CreateModelQuery createModelQuery = new CreateModelQuery();
+//        createModelQuery.visit(p.create_model_statement());
+//        setSql(createModelQuery.getSql());
+//        return createModelQuery;
+//    }
 
 
 

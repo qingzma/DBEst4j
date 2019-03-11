@@ -8,14 +8,16 @@ import org.dbest.commons.Config;
 import org.dbest.commons.DbestStrings;
 import org.dbest.commons.io.DbestFileSystem;
 import org.dbest.parser.DbestSQLParser;
-import org.dbest.parser.DbestSQLParser.Drop_databaseContext;
+import org.dbest.parser.DbestSQLParser.Drop_model_statementContext;
 import org.dbest.sqlparser.SqlParser;
 
 
 
-public class DropSchemaQuery extends DbestQuery{
+public class DropModelQuery extends DbestQuery{
     private static final long serialVersionUID= 8411765163560707481L;
-    private String schema;
+//    private String schema;
+    private String model;
+    private String originalTable;
     private String sql;
     private Logger log = LogManager.getLogger(getClass());
     private static Config config;
@@ -23,7 +25,7 @@ public class DropSchemaQuery extends DbestQuery{
 
 
 
-    public DropSchemaQuery(String sql) {
+    public DropModelQuery(String sql) {
         this.sql = sql;
         this.parse();
         config = new Config();
@@ -32,19 +34,28 @@ public class DropSchemaQuery extends DbestQuery{
 
 
 
-    public void visit(Drop_databaseContext drop_databaseContext){
+    public void visit(Drop_model_statementContext drop_model_statementContext){
         try{
-            this.schema = drop_databaseContext.database.getText();
+            this.model = drop_model_statementContext.model_name.getText();
         }catch (NullPointerException e){
-            log.debug(DbestStrings.EXCEPTION_MODEL_SCHEMA_NOT_PROVIDED);
+            log.debug("Model name is not provided.");
         }
+
+        try{
+            this.originalTable = drop_model_statementContext.original_table.getText();
+        }catch (NullPointerException e){
+            log.debug("Original table is not provided in the model dropping statement.");
+        }
+
+
+
 //        log.debug(this.schema);
     }
 
     @Override
     public void parse(){
         DbestSQLParser p = SqlParser.parse(this.sql);
-        visit(p.drop_database());
+        visit(p.drop_model_statement());
     }
 
 
@@ -59,7 +70,7 @@ public class DropSchemaQuery extends DbestQuery{
     public synchronized void execute(boolean getResult) {
         if (! getResult){
             fileSystem = new DbestFileSystem();
-            fileSystem.dropSchema(schema);
+            fileSystem.dropModel(model);
             fileSystem.close();
         }
     }

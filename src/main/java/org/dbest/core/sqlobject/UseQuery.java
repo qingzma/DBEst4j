@@ -12,7 +12,7 @@ import org.dbest.sqlparser.SqlParser;
 public class UseQuery extends DbestQuery {
     private static final long serialVersionUID= 8626554562524809884L;
     private Logger log = LogManager.getLogger(getClass());
-    private static DbestFileSystem fileSystem= new DbestFileSystem();
+    private static DbestFileSystem fileSystem;
 
     private String schema;
     private String sql;
@@ -21,7 +21,7 @@ public class UseQuery extends DbestQuery {
         this.sql = sql;
         this.parse();
 //        config = new Config();
-        execute();
+        execute(false);
     }
 
     public void visit(Use_statementContext use_databaseContext){
@@ -47,13 +47,11 @@ public class UseQuery extends DbestQuery {
     }
 
     @Override
-    public void execute() {
-        fileSystem.setWorkingDirecotry(fileSystem.getWarehouseDir()+"/"+schema);
-        log.info("OK");
-    }
-
-    @Override
-    public void execute(boolean getResult) {
-
+    public synchronized void execute(boolean getResult) {
+        if (! getResult){
+            fileSystem = new DbestFileSystem();
+            fileSystem.useSchema(schema);
+            fileSystem.close();
+        }
     }
 }

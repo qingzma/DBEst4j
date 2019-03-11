@@ -8,9 +8,7 @@ public abstract class DbestQuery implements Serializable {
 
     public abstract void parse();
 
-    public abstract void execute();
-
-    public abstract void execute(boolean getResult);
+    public abstract  void execute(boolean getResult);
 
     public String stripQuote(String expr) {
         return expr.replace("\"", "").replace("`", "");

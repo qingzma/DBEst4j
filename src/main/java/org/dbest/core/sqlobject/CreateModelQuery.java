@@ -3,12 +3,15 @@ package org.dbest.core.sqlobject;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.dbest.commons.Config;
 import org.dbest.commons.DbestStrings;
+import org.dbest.commons.io.DbestFileSystem;
+import org.dbest.parser.DbestSQLParser;
 import org.dbest.parser.DbestSQLParser.Create_model_statementContext;
 import org.dbest.parser.DbestSQLParser.Table_nameContext;
 import org.dbest.parser.DbestSQLParser.Sampling_method_nameContext;
 import org.dbest.parser.DbestSQLParser.Column_nameContext;
-
+import org.dbest.sqlparser.SqlParser;
 
 
 import java.util.ArrayList;
@@ -18,7 +21,7 @@ import java.util.List;
  * This class is used to parse the CREATE MODEL query.
  */
 public class CreateModelQuery extends DbestQuery {
-    private static final long serialVersionUID= 4147244294300305985L;
+    private static final long serialVersionUID= -2708012449533315800L;
     private String newSchema;
     private String newModel;
     private String originalSchema;
@@ -29,8 +32,16 @@ public class CreateModelQuery extends DbestQuery {
     private double samplingRatio;
     private String groupby;
     private Logger logger = LogManager.getLogger(getClass());
+    private static DbestFileSystem fileSystem;
 
+    private String sql;
 
+    public CreateModelQuery(String sql) {
+        this.sql = sql;
+        this.parse();
+//        config = new Config();
+        execute(false);
+    }
 
     public void visit(Create_model_statementContext create_model_statement){
         Table_nameContext model = create_model_statement.model_name;
@@ -130,17 +141,20 @@ public class CreateModelQuery extends DbestQuery {
 
     @Override
     public void parse() {
-
+        DbestSQLParser p = SqlParser.parse(this.sql);
+        visit(p.create_model_statement());
     }
 
-    @Override
-    public void execute() {
 
-    }
+
 
     @Override
-    public void execute(boolean getResult) {
-
+    public synchronized void execute(boolean getResult) {
+        if (! getResult){
+            fileSystem = new DbestFileSystem();
+            fileSystem.createModelDir(newModel);
+            fileSystem.close();
+        }
     }
 
 }
