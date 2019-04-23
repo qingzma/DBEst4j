@@ -4,31 +4,59 @@
 <!-- Put site-specific property overrides in this file. -->
 
 <configuration>
-	<property>
-		  <name>dbest.warehouse</name>
-		  <value>hdfs://localhost:9000/user/dbest/warehouse</value>
-		  <description></description>
-	</property>
-	<property>
-		  <name>spark.master</name>
-		  <value>local</value>
-		  <description></description>
-	</property>
-	<property>
-		  <name>spark.warehouse</name>
-		  <value>hdfs://localhost:9000/user/spark/warehouse</value>
-		  <description></description>
-	</property>
-	<property>
-		  <name>fs.default.name</name>
-		  <value>hdfs://localhost:9000</value>
-		  <description></description>
-	</property>
+    <!--<property>-->
+        <!--<name>dbest.warehouse</name>-->
+        <!--<value>hdfs://localhost:9000/user/dbest/warehouse</value>-->
+        <!--<description></description>-->
+    <!--</property>-->
+    <!--<property>-->
+        <!--<name>spark.master</name>-->
+        <!--<value>local</value>-->
+        <!--<description></description>-->
+    <!--</property>-->
+    <!--<property>-->
+        <!--<name>spark.warehouse</name>-->
+        <!--<value>hdfs://localhost:9000/user/spark/warehouse</value>-->
+        <!--<description></description>-->
+    <!--</property>-->
+    <!--<property>-->
+        <!--<name>fs.default.name</name>-->
+        <!--<value>hdfs://localhost:9000</value>-->
+        <!--<description></description>-->
+    <!--</property>-->
 
-	<!-- <property>127.0.0.1
-		  <name></name>
-		  <value></value>
-		  <description></description>
-	</property> -->
+
+    <property>
+    <name>dbest.warehouse</name>
+    <value>hdfs://137.205.118.65:9000/user/dbest/warehouse</value>
+    <description></description>
+    </property>
+    <!--<property>-->
+    <!--<name>spark.master</name>-->
+    <!--<value>spark://137.205.118.65:7077</value>-->
+    <!--<description></description>-->
+    <!--</property>-->
+    <property>
+    <name>spark.master</name>
+    <value>spark://137.205.118.65:7077</value>
+    <description></description>
+    </property>
+
+    <property>
+    <name>spark.warehouse</name>
+    <value>hdfs://137.205.118.65:9000/user/spark/warehouse</value>
+    <description></description>
+    </property>
+    <property>
+    <name>fs.default.name</name>
+    <value>hdfs://137.205.118.65:9000</value>
+    <description></description>
+    </property>
+
+    <!-- <property>
+          <name></name>
+          <value></value>
+          <description></description>
+    </property> -->
 
 </configuration>

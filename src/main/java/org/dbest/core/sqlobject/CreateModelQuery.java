@@ -146,13 +146,11 @@ public class CreateModelQuery extends DbestQuery {
     }
 
 
-
-
     @Override
     public synchronized void execute(boolean getResult) {
         if (! getResult){
             fileSystem = new DbestFileSystem();
-            fileSystem.createModelDir(newModel);
+            fileSystem.createModelDir(originalTable);
             fileSystem.close();
         }
     }

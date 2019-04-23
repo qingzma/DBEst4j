@@ -43,7 +43,22 @@ public class DbestFileSystem {
     }
 
 
-    public void createModelDir(String model){
+    public void createModelDir(String oldTable){
+        String dirName = getWorkingDirecotry()+"/"+oldTable;
+//        log.warn(dirName+" __________________________");
+        try{
+            if (fileSystem.exists(new Path(dirName))){
+                log.warn("Directory for Model "+oldTable +" already exists! abort.");
+            }else{
+                fileSystem.mkdirs(new Path(dirName));
+                log.trace("Created Directory for Model "+oldTable);
+            }
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void createModelFile(String model){
         String dirName = getWorkingDirecotry()+"/"+model;
 //        log.warn(dirName+" __________________________");
         try{
@@ -57,6 +72,8 @@ public class DbestFileSystem {
             e.printStackTrace();
         }
     }
+
+
 
     public void createSchema(String schema){
         String dirName = getWarehouseDir()+"/"+schema;
