@@ -4,26 +4,26 @@
 <!-- Put site-specific property overrides in this file. -->
 
 <configuration>
-    <!--<property>-->
-        <!--<name>dbest.warehouse</name>-->
-        <!--<value>hdfs://localhost:9000/user/dbest/warehouse</value>-->
-        <!--<description></description>-->
-    <!--</property>-->
-    <!--<property>-->
-        <!--<name>spark.master</name>-->
-        <!--<value>local</value>-->
-        <!--<description></description>-->
-    <!--</property>-->
-    <!--<property>-->
-        <!--<name>spark.warehouse</name>-->
-        <!--<value>hdfs://localhost:9000/user/spark/warehouse</value>-->
-        <!--<description></description>-->
-    <!--</property>-->
-    <!--<property>-->
-        <!--<name>fs.default.name</name>-->
-        <!--<value>hdfs://localhost:9000</value>-->
-        <!--<description></description>-->
-    <!--</property>-->
+<!--    <property>-->
+<!--        <name>dbest.warehouse</name>-->
+<!--        <value>hdfs://localhost:9000/user/dbest/warehouse</value>-->
+<!--        <description></description>-->
+<!--    </property>-->
+<!--    <property>-->
+<!--        <name>spark.master</name>-->
+<!--        <value>local</value>-->
+<!--        <description></description>-->
+<!--    </property>-->
+<!--    <property>-->
+<!--        <name>spark.warehouse</name>-->
+<!--        <value>hdfs://localhost:9000/user/spark/warehouse</value>-->
+<!--        <description></description>-->
+<!--    </property>-->
+<!--    <property>-->
+<!--        <name>fs.default.name</name>-->
+<!--        <value>hdfs://localhost:9000</value>-->
+<!--        <description></description>-->
+<!--    </property>-->
 
 
     <property>

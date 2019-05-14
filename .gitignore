@@ -3,3 +3,4 @@
 target/
 sparkwarehouse/
 metastore_db/
+derby.log
